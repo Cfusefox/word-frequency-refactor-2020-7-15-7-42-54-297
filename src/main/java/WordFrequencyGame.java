@@ -13,9 +13,6 @@ public class WordFrequencyGame {
     public String getResult(String sentence) {
 
 
-        if (sentence.split(SPACE_PATTERN).length==1) {
-            return sentence + " 1";
-        } else {
 
             try {
 
@@ -25,7 +22,7 @@ public class WordFrequencyGame {
             } catch (Exception e) {
                 return CALCULATE_ERROR;
             }
-        }
+
     }
 
     private List<Input> getAllWordInformation(String sentence) {
