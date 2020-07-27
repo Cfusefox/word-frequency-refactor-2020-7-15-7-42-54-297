@@ -22,25 +22,25 @@ public class WordFrequencyGame {
 
                 String[] words = sentence.split(SPACE_PATTERN);
 
-                List<Input> inputList = new ArrayList<>();
+                List<Input> repeatWordInfos = new ArrayList<>();
                 for (String word : words) {
                     Input input = new Input(word, 1);
-                    inputList.add(input);
+                    repeatWordInfos.add(input);
                 }
 
-                Map<String, List<Input>> map =getListMap(inputList);
+                Map<String, List<Input>> map =getListMap(repeatWordInfos);
 
                 List<Input> list = new ArrayList<>();
                 for (Map.Entry<String, List<Input>> entry : map.entrySet()) {
                     Input input = new Input(entry.getKey(), entry.getValue().size());
                     list.add(input);
                 }
-                inputList = list;
+                repeatWordInfos = list;
 
-                inputList.sort((w1, w2) -> w2.getWordCount() - w1.getWordCount());
+                repeatWordInfos.sort((w1, w2) -> w2.getWordCount() - w1.getWordCount());
 
                 StringJoiner joiner = new StringJoiner(LINE_BREAK);
-                for (Input w : inputList) {
+                for (Input w : repeatWordInfos) {
                     String s = w.getValue() + BLACK_SPACE +w.getWordCount();
                     joiner.add(s);
                 }
