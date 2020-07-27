@@ -11,17 +11,15 @@ public class WordFrequencyGame {
     private static final String LINE_BREAK = "\n";
 
     public String getResult(String sentence) {
+        
+        try {
 
+            List<Input> wordInfos = getAllWordInformation(sentence);
 
-
-            try {
-
-                List<Input> wordInfos = getAllWordInformation(sentence);
-
-                return wordFrequencyResultGenerator(wordInfos);
-            } catch (Exception e) {
-                return CALCULATE_ERROR;
-            }
+            return wordFrequencyResultGenerator(wordInfos);
+        } catch (Exception e) {
+            return CALCULATE_ERROR;
+        }
 
     }
 
@@ -29,7 +27,7 @@ public class WordFrequencyGame {
         String[] words = sentence.split(SPACE_PATTERN);
         List<Input> wordInfos = new ArrayList<>();
         HashSet<String> uniqueWord = new HashSet<>(Arrays.asList(words));
-        for(String word : uniqueWord) {
+        for (String word : uniqueWord) {
             wordInfos.add(new Input(word, (int) Arrays.stream(words).filter(item -> item.equals(word)).count()));
         }
         return wordInfos;
@@ -39,7 +37,7 @@ public class WordFrequencyGame {
         repeatWordInfos.sort((firstWordInfo, secondWordInfo) -> secondWordInfo.getWordCount() - firstWordInfo.getWordCount());
         StringJoiner joiner = new StringJoiner(LINE_BREAK);
         for (Input wordInfo : repeatWordInfos) {
-            String s = wordInfo.getValue() + BLACK_SPACE +wordInfo.getWordCount();
+            String s = wordInfo.getValue() + BLACK_SPACE + wordInfo.getWordCount();
             joiner.add(s);
         }
         return joiner.toString();
