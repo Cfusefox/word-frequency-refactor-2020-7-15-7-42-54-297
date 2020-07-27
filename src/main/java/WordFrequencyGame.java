@@ -1,8 +1,7 @@
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.StringJoiner;
+
+import javax.print.DocFlavor;
+import java.lang.reflect.Array;
+import java.util.*;
 
 public class WordFrequencyGame {
 
@@ -20,27 +19,23 @@ public class WordFrequencyGame {
 
             try {
 
-                String[] words = sentence.split(SPACE_PATTERN);
-
-                List<Input> repeatWordInfos = new ArrayList<>();
-                for (String word : words) {
-                    Input input = new Input(word, 1);
-                    repeatWordInfos.add(input);
-                }
-
-                Map<String, List<Input>> wordInfosMap =getListMap(repeatWordInfos);
-
-                List<Input> wordInfos = new ArrayList<>();
-                for (Map.Entry<String, List<Input>> entry : wordInfosMap.entrySet()) {
-                    Input input = new Input(entry.getKey(), entry.getValue().size());
-                    wordInfos.add(input);
-                }
+                List<Input> wordInfos = getAllWordInformation(sentence);
 
                 return wordFrequencyResultGenerator(wordInfos);
             } catch (Exception e) {
                 return CALCULATE_ERROR;
             }
         }
+    }
+
+    private List<Input> getAllWordInformation(String sentence) {
+        String[] words = sentence.split(SPACE_PATTERN);
+        List<Input> wordInfos = new ArrayList<>();
+        HashSet<String> uniqueWord = new HashSet<>(Arrays.asList(words));
+        for(String word : uniqueWord) {
+            wordInfos.add(new Input(word, (int) Arrays.stream(words).filter(item -> item.equals(word)).count()));
+        }
+        return wordInfos;
     }
 
     private String wordFrequencyResultGenerator(List<Input> repeatWordInfos) {
