@@ -30,12 +30,12 @@ public class WordFrequencyGame {
 
                 Map<String, List<Input>> wordInfosMap =getListMap(repeatWordInfos);
 
-                List<Input> list = new ArrayList<>();
+                List<Input> wordInfos = new ArrayList<>();
                 for (Map.Entry<String, List<Input>> entry : wordInfosMap.entrySet()) {
                     Input input = new Input(entry.getKey(), entry.getValue().size());
-                    list.add(input);
+                    wordInfos.add(input);
                 }
-                repeatWordInfos = list;
+                repeatWordInfos = wordInfos;
 
                 repeatWordInfos.sort((w1, w2) -> w2.getWordCount() - w1.getWordCount());
 
