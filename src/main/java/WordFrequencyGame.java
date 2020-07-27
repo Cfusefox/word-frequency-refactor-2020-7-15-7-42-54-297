@@ -1,6 +1,4 @@
 
-import javax.print.DocFlavor;
-import java.lang.reflect.Array;
 import java.util.*;
 
 public class WordFrequencyGame {
@@ -11,7 +9,7 @@ public class WordFrequencyGame {
     private static final String LINE_BREAK = "\n";
 
     public String getResult(String sentence) {
-        
+
         try {
 
             List<Input> wordInfos = getAllWordInformation(sentence);
